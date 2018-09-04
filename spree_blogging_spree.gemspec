@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 3.2'
-  s.add_dependency 'acts-as-taggable-on', '~> 5.0'
+  s.add_dependency 'spree_core', '~> 3.6.3'
+  s.add_dependency 'acts-as-taggable-on', '~> 6.0'
 
   # s.add_development_dependency 'capybara', '~> 2.2.1'
   # s.add_development_dependency 'coffee-rails', '~> 4.0.0'
