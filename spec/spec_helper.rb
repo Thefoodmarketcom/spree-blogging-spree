@@ -34,7 +34,7 @@ require 'spree/testing_support/capybara_ext'
 require 'spree_blogging_spree/factories'
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # == URL Helpers
   #
