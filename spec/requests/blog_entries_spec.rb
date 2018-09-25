@@ -10,7 +10,9 @@ describe "BlogEntries" do
       :body => "Body of the blog entry.", 
       :summary => "Summary of the blog entry.",
       :author => @author,
-      :published_at => DateTime.new(2020, 3, 11))
+      :published_at => DateTime.new(2020, 3, 11),
+      :meta_description => 'SEO of the entry',
+      :meta_keywords => 'first, blog, entry')
     @blog_entry.tag_list = "baz, bob"
     @blog_entry.category_list = "cat1"
     @blog_entry.save!
@@ -98,6 +100,11 @@ describe "BlogEntries" do
       @author.update_attribute(:google_plus_url, 'https://example.com/123/')
       visit "/blog/2020/03/11/first-blog-entry"
       page.should have_css("link[rel='author'][href='https://example.com/123/']", visible: false)
+    end
+    it "should populate seo tags" do
+      visit "/blog/2020/03/11/first-blog-entry"
+      page.should have_css("meta[name='description'][content='#{@blog_entry.meta_description}']", visible: false)
+      page.should have_css("meta[name='keywords'][content='#{@blog_entry.meta_keywords}']", visible: false)
     end
   end
 

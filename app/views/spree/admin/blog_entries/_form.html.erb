@@ -121,3 +121,21 @@
 <% end %>
 </div><!-- col -->
 </div><!-- row -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= form.field_container :meta_keywords, class: ['form-group'] do %>
+      <%= form.label :meta_keywords, Spree.t(:meta_keywords) %>
+      <%= form.text_field :meta_keywords, class: 'form-control' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= form.field_container :meta_description, class: ['form-group'] do %>
+      <%= form.label :meta_description, Spree.t(:meta_description) %>
+      <%= form.text_field :meta_description, class: 'form-control' %>
+    <% end %>
+  </div>
+</div>

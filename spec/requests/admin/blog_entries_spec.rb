@@ -82,5 +82,18 @@ describe "Blog Entry", :js => true do
       expect(page).to have_css("img[src*='#{file_name}']")
     end
 
+    it "should edit an existing blog entry meta data" do
+      within_row(1) { click_icon :edit }
+
+      new_meta_description = 'New meta description'
+      new_meta_keywords = 'New meta keywords'
+
+      fill_in 'blog_entry_meta_description', with: new_meta_description
+      fill_in 'blog_entry_meta_keywords', with: new_meta_keywords
+      click_on 'Update'
+
+      expect(find_field('blog_entry_meta_description').value).to eq(new_meta_description)
+      expect(find_field('blog_entry_meta_keywords').value).to eq(new_meta_keywords)
+    end
   end
 end
