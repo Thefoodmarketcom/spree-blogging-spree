@@ -44,8 +44,8 @@ describe "Blog Entry", :js => true do
       page.should have_content("New body")
       page.should have_content("New summary")
       find_field('blog_entry_title').value.should == "New title"
-      find_field('blog_entry_tag_list').value.should == "tag1 tag2"
-      find_field('blog_entry_category_list').value.should == "cat1 cat2"
+      find_field('blog_entry_tag_list').value.should == "tag1, tag2"
+      find_field('blog_entry_category_list').value.should == "cat1, cat2"
       find_field('blog_entry_published_at').value.should == "2013/02/01"
       find_field('blog_entry_visible').value.should == "1"
       find_field('blog_entry_permalink').value.should == "some-permalink-path"
@@ -63,20 +63,37 @@ describe "Blog Entry", :js => true do
     end
 
     it "should add a featured image to a blog entry" do
-      file_path = Rails.root + "../../spec/support/image.png"
+      file_name = 'image.png'
+      file_path = Rails.root + "../../spec/support/#{file_name}"
+      file_alt = 'image alt text'
 
       within_row(1) { click_icon :edit }
       attach_file('blog_entry_blog_entry_image_attributes_attachment', file_path)
       click_button "Update"
-      page.should have_content("successfully updated")
-      page.should have_content("image.png")
 
-      fill_in 'blog_entry_blog_entry_image_attributes_alt', :with => "image alt text"
+      expect(page).to have_content("successfully updated")
+      expect(page).to have_css("img[src*='#{file_name}']")
+
+      fill_in 'blog_entry_blog_entry_image_attributes_alt', with: file_alt
       click_button "Update"
-      page.should have_content("successfully updated")
-      find_field('Alternative Text').value.should == "image alt text"
-      page.should have_content("image.png")
+
+      expect(page).to have_content("successfully updated")
+      expect(page).to have_field("Alternative Text", with: file_alt)
+      expect(page).to have_css("img[src*='#{file_name}']")
     end
 
+    it "should edit an existing blog entry meta data" do
+      within_row(1) { click_icon :edit }
+
+      new_meta_description = 'New meta description'
+      new_meta_keywords = 'New meta keywords'
+
+      fill_in 'blog_entry_meta_description', with: new_meta_description
+      fill_in 'blog_entry_meta_keywords', with: new_meta_keywords
+      click_on 'Update'
+
+      expect(find_field('blog_entry_meta_description').value).to eq(new_meta_description)
+      expect(find_field('blog_entry_meta_keywords').value).to eq(new_meta_keywords)
+    end
   end
 end

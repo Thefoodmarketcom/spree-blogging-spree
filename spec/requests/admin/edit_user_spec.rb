@@ -20,8 +20,8 @@ describe "User" do
         fill_in 'Biographical info', with: 'Lorem ipsum dolor sit amet.'
         click_on 'Update'
         page.should have_content("Account updated")
-        field_labeled("Nickname").value.should == 'Joe Bloggs'
-        field_labeled("Website URL").value.should == 'http://example.com/'
+        find_field("Nickname").value.should == 'Joe Bloggs'
+        find_field("Website URL").value.should == 'http://example.com/'
         find_field('Google Plus URL').value.should ==  'https://example.com/123/'
         page.should have_content('Lorem ipsum dolor sit amet.')
       end

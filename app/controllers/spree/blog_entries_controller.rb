@@ -28,7 +28,10 @@ class Spree::BlogEntriesController < Spree::StoreController
   end
 
   def archive
-    @blog_entries = Spree::BlogEntry.visible.by_date(params).page(@pagination_page).per(@pagination_per_page)
+    @blog_entries = Spree::BlogEntry
+                      .visible.by_date(params.permit(:day, :month, :year).to_h)
+                      .page(@pagination_page)
+                      .per(@pagination_per_page)
   end
 
   def feed
