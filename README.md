@@ -22,7 +22,7 @@ Screenshot
 
 This screenshot shows some example blog entries with the widgets in the left sidebar:
 
-![Screenshot](https://raw.github.com/stefansenk/spree-blogging-spree/master/screenshot.png)
+![Screenshot](https://raw.github.com/Thefoodmarketcom/spree-blogging-spree/master/screenshot.png)
 
 
 Installation
@@ -31,7 +31,7 @@ Installation
 Add to your Gemfile:
 
 ```ruby
-gem 'spree_blogging_spree', github: 'krazedkrish/spree-blogging-spree', branch: '3-0-stable'
+gem 'spree_blogging_spree', github: 'Thefoodmarketcom/spree-blogging-spree', branch: '3-6'
 ```
 
 Bundle your dependencies and run the installation generator:
